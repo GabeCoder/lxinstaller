@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo apt install yad || zenity --error --text="The installer cannot launch."
+if yad --title="Installer" --text="Welcome to the installer! This will install the application on your computer's disk. Click OK to continue." --width=300 --height=300
+then
+	if zenity --question --title="Installation" --text="This installation will occupy a portion of your disk space. Are you sure you want to install the application?" --width=300
+	then
+		#installation
+		zenity --info --icon-name=emblem-default --title="Success" --text="Installation complete." --width=300
+	fi
+fi
