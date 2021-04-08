@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#Debian Graphical Installer
+sudo apt install yad -y #install dialog program
+name="Application" #name of application
+if yad --window-icon=package --image=package --title="Installer" --text='Welcome to the '"$name"' installer! This will automatically install '"$name"' on your computer. Click "OK" to continue the installation. Otherwise, click "Cancel" to exit.' --width=300 --height=300 #installer dialog
+then
+	(
+		#installation instructions
+		sudo apt install git -y #install GitHub
+		cd "$HOME" #find home directory
+	) | yad --progress --center --window-icon=package --title="Installing..." --progress-text='Installing '"$name"'...' --pulsate --auto-close --auto-kill --no-buttons --width=450 --height=100 #progress indicator dialog
+	zenity --info --icon-name=emblem-default --title="Success" --text="Installation complete." --width=300 #installation completion dialog
+fi
